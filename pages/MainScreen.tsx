@@ -1,36 +1,80 @@
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import TaskQueue from "../components/TaskQueue";
 import Timer from "../components/Timer";
+import { ScheduleContext } from "../contexts";
 import MyText from "../fonts/MyText";
 import Minimal from "../layouts/Minimal";
+import { ITask } from "../types";
+import { getTaskQueue } from "../utils";
 
 export default function MainScreen() {
-    return (
+    const { schedule } = useContext(ScheduleContext)
+
+    const [timer, setTimer] = useState(null as unknown as number)
+    const [prevTask, setPrevTask] = useState(null as unknown as ITask)
+    const [currentTask, setCurrentTask] = useState(null as unknown as ITask)
+    const [nextTask, setNextTask] = useState(null as unknown as ITask)
+    // const [wasNotified, setWasNotified] = useState(false)
+
+    const tick = () => {
+        const { prevTask: prev, currentTask: curr, nextTask: next } = getTaskQueue(schedule)
+        if (currentTask && ((!currentTask.id && !curr.id) || (currentTask.id && curr.id && currentTask.id === curr.id))) return
+        setPrevTask(prev); setCurrentTask(curr); setNextTask(next)
+    }
+
+    useEffect(() => {
+        setTimer(setInterval(tick, 1000))
+
+        // TODO: Notifications
+        // if (!wasNotified && currentTask) {
+        //     notify(currentTask)
+        //     setWasNotified(true)
+        // }
+
+        return clearInterval(timer)
+    }, [currentTask])
+
+    function nullifyGaps(task: ITask) {
+        if (!task || task.name === "Chill") return null as unknown as ITask
+
+        return task
+    }
+
+    return currentTask ? (
         <Minimal>
             <View style={styles.container}>
                 <View style={styles.top}>
-                    <Timer/>
-                    <View>
-                        <MyText>
-                            <Text style={styles.topText}>Te amo, Isita ❤️</Text>
-                        </MyText>
-                    </View>
+                    {currentTask ? (
+                        <>
+                            <Timer task={currentTask} />
+                            <View>
+                                <MyText>
+                                    <Text style={styles.topText}>{currentTask.name}</Text>
+                                </MyText>
+                            </View>
+                        </>
+                    ) : false}
                 </View>
                 <View style={styles.void}></View>
                 <View style={styles.middle}>
                     <Text style={styles.middleText}>
-                        <MyText>
-                            <Text style={styles.label}>Cuanto? </Text>
-                        </MyText>
-                        <MyText>Infinitamente♾️</MyText>
+                        {nextTask ? (
+                            <>
+                                <MyText>
+                                    <Text style={styles.label}>Next: </Text>
+                                </MyText>
+                                <MyText>{nextTask.name}</MyText>
+                            </>
+                        ) : ( <MyText><Text style={styles.lastTask}>Last task</Text></MyText> )}
                     </Text>
                 </View>
                 <View style={styles.bottom}>
-                    <TaskQueue/>
+                    <TaskQueue prev={nullifyGaps(prevTask)} current={nullifyGaps(currentTask)} next={nullifyGaps(nextTask)}/>
                 </View>
             </View>
         </Minimal>
-    )
+    ) : (<View><Text>Nonono</Text></View>)
 }
 
 const styles = StyleSheet.create({
@@ -66,5 +110,8 @@ const styles = StyleSheet.create({
     },
     label: {
         fontWeight: 'bold'
+    },
+    lastTask: {
+        fontStyle: 'italic'
     }
 })
