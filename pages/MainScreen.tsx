@@ -7,6 +7,7 @@ import MyText from "../fonts/MyText";
 import Minimal from "../layouts/Minimal";
 import { ITask } from "../types";
 import { getTaskQueue } from "../utils";
+import LoadScreen from "./LoadScreen";
 
 export default function MainScreen() {
     const { schedule } = useContext(ScheduleContext)
@@ -74,7 +75,7 @@ export default function MainScreen() {
                 </View>
             </View>
         </Minimal>
-    ) : (<View><Text>Nonono</Text></View>)
+    ) : <LoadScreen />
 }
 
 const styles = StyleSheet.create({

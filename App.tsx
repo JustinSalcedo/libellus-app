@@ -4,7 +4,9 @@ import MainScreen from './pages/MainScreen'
 import { ScheduleContext } from './contexts'
 import { ITask } from './types'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { validateSchedule } from './utils'
+import { getTaskQueue, validateSchedule } from './utils'
+import ScheduleComplete from './pages/ScheduleComplete'
+import LoadScreen from './pages/LoadScreen'
 
 export default function App() {
     const [schedule, setSchedule] = useState([] as ITask[])
@@ -26,9 +28,14 @@ export default function App() {
 			.catch(e => e)
 	}, [hasLoaded])
 
+    const isActiveSchedule = () => {
+        const { currentTask, nextTask } = getTaskQueue(validateSchedule(schedule), true)
+        return schedule.length && (currentTask || nextTask)
+    }
+
 	return (
 		<ScheduleContext.Provider value={{ schedule, setSchedule }}>
-			<MainScreen />
+			{!hasLoaded ? <LoadScreen /> : (isActiveSchedule() ? <MainScreen /> : <ScheduleComplete /> )}
 		</ScheduleContext.Provider>
 	)
 }
