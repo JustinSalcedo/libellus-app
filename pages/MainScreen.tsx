@@ -59,16 +59,16 @@ export default function MainScreen() {
                 </View>
                 <View style={styles.void}></View>
                 <View style={styles.middle}>
-                    <Text style={styles.middleText}>
-                        {nextTask ? (
-                            <>
-                                <MyText>
-                                    <Text style={styles.label}>Next: </Text>
-                                </MyText>
-                                <MyText>{nextTask.name}</MyText>
-                            </>
-                        ) : ( <MyText><Text style={styles.lastTask}>Last task</Text></MyText> )}
-                    </Text>
+                    {nextTask ? (
+                        <>
+                            <MyText>
+                                <Text style={[styles.middleText, styles.label]}>Next: </Text>
+                            </MyText>
+                            <MyText>
+                                <Text style={styles.middleText}>{nextTask.name}</Text>
+                            </MyText>
+                        </>
+                    ) : ( <MyText><Text style={[styles.middleText, styles.lastTask]}>Last task</Text></MyText> )}
                 </View>
                 <View style={styles.bottom}>
                     <TaskQueue prev={nullifyGaps(prevTask)} current={nullifyGaps(currentTask)} next={nullifyGaps(nextTask)}/>

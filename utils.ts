@@ -2,7 +2,6 @@ import { MAX_TASK_NAME } from "./constants"
 import { ITask } from "./types"
 
 const DEF_GAP = { name: "Chill" }
-// const MAX_TASK_NAME = 24
 
 export function getTimeLeft(task: ITask, unit: 's' | 'm', positiveOnly?: boolean) {
     const msCurrentTime = Date.now()
@@ -193,6 +192,29 @@ export function getTodayRange() {
     const startsAt = new Date(today)
     const endsAt = new Date(startsAt.getTime() + 24 * 60 * 60 * 1000)
     return { startsAt, endsAt }
+}
+
+// Layout
+
+function getLocalDate(date: Date) {
+	const month = date.getMonth() < 9 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`
+	const dateNum = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`
+	return `${date.getFullYear()}-${month}-${dateNum}`
+}
+
+export function countRows(sortedSchedule: ITask[], showHistory: boolean) {
+    let rowsCount = 0
+
+    const parsedSchedule = showHistory ? sortedSchedule : sortedSchedule.filter(task => Date.now() < task.end.getTime())
+    const startDate = getLocalDate(parsedSchedule[0].start)
+    const endDate = getLocalDate(parsedSchedule[parsedSchedule.length - 1].start)
+
+    if (startDate !== endDate) {
+        rowsCount += Math.round((new Date(`${endDate} 00:00`).getTime() - new Date(`${startDate} 00:00`).getTime()) / (24 * 60 * 60 * 1000))
+    }
+
+    rowsCount += parsedSchedule.length
+    return rowsCount
 }
 
 // Misc

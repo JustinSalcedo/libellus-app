@@ -1,12 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useContext } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { ViewContext } from "../contexts";
 import MyText from "../fonts/MyText";
 import { ITask } from "../types";
 
 export default function TaskQueue({ prev, next, current }: {
     prev?: ITask, current?: ITask, next?: ITask
 }) {
+    const { setActiveModal, launchModal } = useContext(ViewContext)
+
+    function handleOnClick() {
+        setActiveModal('task-history')
+        launchModal(true)
+    }
+
     return (
-        <View style={styles.taskQueue}>
+        <Pressable style={styles.taskQueue} onPress={handleOnClick}>
             <View>
                 <MyText>
                     <Text style={styles.prevText}>{prev ? prev.name : "..."}</Text>
@@ -22,7 +31,7 @@ export default function TaskQueue({ prev, next, current }: {
                     <Text style={styles.nextText}>{next ? next.name : "..."}</Text>
                 </MyText>
             </View>
-        </View>
+        </Pressable>
     )
 }
 

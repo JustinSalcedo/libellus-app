@@ -6,7 +6,8 @@ export default function MyText({ children }: { children: ReactNode }) {
         <Text style={{
             fontFamily: Platform.OS === 'web'
                 ? "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-                : 'sans-serif'
+                : 'sans-serif',
+            fontSize: 16
         }}>{children}</Text>
     )
 }

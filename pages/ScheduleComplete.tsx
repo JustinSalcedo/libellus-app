@@ -15,7 +15,7 @@ export default function ScheduleComplete() {
                     <View style={styles.messageContainer}>
                         <Text style={styles.messageText}>
                             <MyText>
-                                <Text style={styles.boldText}>Schedule finished{Platform.OS === "web" ? ' ' : ''}</Text>
+                                <Text style={styles.headerText}>Schedule finished{Platform.OS === "web" ? ' ' : ''}</Text>
                             </MyText>
                         </Text>
                         <Text style={[styles.messageText, styles.checkmark]}>✔️</Text>
@@ -25,14 +25,14 @@ export default function ScheduleComplete() {
                     <MyButton onPress={onAddNewTasks} title={'Add new tasks'} />
                 </View>
                 <View style={styles.note}>
-                    <Text style={styles.noteText}>
-                        <MyText>No more schedules</MyText>
-                    </Text>
+                    <MyText>
+                        <Text style={styles.noteText}>No more schedules</Text>
+                    </MyText>
                 </View>
                 <View style={styles.schedule}>
-                    <Text style={styles.scheduleText}>
-                        <MyText>Default tasklist</MyText>
-                    </Text>
+                    <MyText>
+                        <Text style={styles.scheduleText}>Default tasklist</Text>
+                    </MyText>
                 </View>
             </View>
         </Minimal>
@@ -56,10 +56,10 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     messageText: {
-        fontSize: 2.34 * 16,
         textAlign: "center"
     },
-    boldText: {
+    headerText: {
+        fontSize: 2.34 * 16,
         fontWeight: "bold"
     },
     checkmark: {

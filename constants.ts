@@ -5,3 +5,5 @@
 // export const USER_ID = config.userId
 
 export const MAX_TASK_NAME = 24
+
+export const MAX_ROWS_COUNT = 17
