@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Modal from "../components/Modal";
+import Sidebar from "../components/Sidebar";
 import { ViewContext } from "../contexts";
 import { ModalName } from "../types";
 
@@ -20,6 +21,7 @@ export default function Minimal({ children }: { children: ReactNode }) {
         }}>
             <View style={modalOn ? styles.on : styles.off}/>
             <Modal onOverlayPress={handleOnClick} nodeKey={activeModal}/>
+            <Sidebar/>
             <View style={styles.screen}>
                 {children}
             </View>
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
     on: {
         height: "100%",
         position: "absolute",
-        zIndex: 1,
+        zIndex: 2,
         width: "100%",
         backgroundColor: "hsla(235, 100%, 7%, 0.64)"
     }

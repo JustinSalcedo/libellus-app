@@ -66,7 +66,7 @@ export default function Modal({ onOverlayPress, heading, nodeKey, children }: {
 const styles = StyleSheet.create({
     screen: {
         position: "absolute",
-        zIndex: 2,
+        zIndex: 3,
         backgroundColor: "none",
         height: "100%",
         width: "100%",

@@ -2,122 +2,122 @@ import { ITask } from "./types";
 
 const MOCK_SCHEDULE = [
 	{
-		id: "YaLbTu5LhBDHr1OjErAP",
+		id: "Ecb2IAHLQMob4RI6cZTy",
 		name: "Sleep",
-		start: "2023-03-26T06:00:00.000Z",
-		end: "2023-03-26T14:00:00.000Z",
+		start: "2023-03-27T06:00:00.000Z",
+		end: "2023-03-27T14:00:00.000Z",
 	},
 	{
-		id: "5QH0GhfiP38aMOPDGbsV",
+		id: "0qSiQAq4EJosfeSZbvsd",
 		name: "Wake up!",
-		start: "2023-03-26T14:00:00.000Z",
-		end: "2023-03-26T14:15:00.000Z",
+		start: "2023-03-27T14:00:00.000Z",
+		end: "2023-03-27T14:15:00.000Z",
 	},
 	{
-		id: "1l4qssCL6XJP8i6iHkyl",
+		id: "Iy1qRI92h6hLJWJZxY3B",
 		name: "Coffee",
-		start: "2023-03-26T14:15:00.000Z",
-		end: "2023-03-26T14:45:00.000Z",
+		start: "2023-03-27T14:15:00.000Z",
+		end: "2023-03-27T14:45:00.000Z",
 	},
 	{
-		id: "SyeRlRH6gNWhQtsqUzlR",
+		id: "aljbK4pEdg4bUZlmqaOG",
 		name: "Setup",
-		start: "2023-03-26T14:45:00.000Z",
-		end: "2023-03-26T15:00:00.000Z",
-	},
-	{
-		id: "kXyb2ETPX59wRQrkMCyE",
-		name: "Troubleshooting",
-		start: "2023-03-26T15:00:00.000Z",
-		end: "2023-03-26T16:00:00.000Z",
-	},
-	{
-		id: "LgsDIphFJzkx1CBlpUmF",
-		name: "Breakfast",
-		start: "2023-03-26T16:00:00.000Z",
-		end: "2023-03-26T16:30:00.000Z",
-	},
-	{
-		id: "MfbjA8Atka85zyCS9iLs",
-		name: "Libellus App",
-		start: "2023-03-26T16:45:00.000Z",
-		end: "2023-03-26T22:45:00.000Z",
-	},
-	{
-		id: "ypgFHP6MYDeNHU9mcHWP",
-		name: "NT Quizes",
-		start: "2023-03-26T22:45:00.000Z",
-		end: "2023-03-26T23:30:00.000Z",
-	},
-	{
-		id: "oPtGCpBOtsGTKmCCIAvi",
-		name: "DD Quizes",
-		start: "2023-03-26T23:30:00.000Z",
-		end: "2023-03-27T00:15:00.000Z",
-	},
-	{
-		id: "bBoVB8fecEZxDOY75Guf",
-		name: "DD Intro",
-		start: "2023-03-27T00:15:00.000Z",
-		end: "2023-03-27T00:30:00.000Z",
-	},
-	{
-		id: "nF996Pc91cDLHi1EJOnu",
-		name: "NT Project",
-		start: "2023-03-27T00:45:00.000Z",
-		end: "2023-03-27T01:45:00.000Z",
-	},
-	{
-		id: "7UiEx0HhvO8fAhcQ8LoD",
-		name: "DD Project",
-		start: "2023-03-27T02:00:00.000Z",
-		end: "2023-03-27T03:00:00.000Z",
-	},
-	{
-		id: "NFO1YlUCED00WZqZWubQ",
-		name: "DD Post notes",
-		start: "2023-03-27T03:15:00.000Z",
-		end: "2023-03-27T03:45:00.000Z",
-	},
-	{
-		id: "kicRZ6JecoqPFfoZ0TOx",
-		name: "NT Post notes",
-		start: "2023-03-27T03:45:00.000Z",
-		end: "2023-03-27T04:15:00.000Z",
-	},
-	{
-		id: "f6LkXKPnHvOV0JzVgWZ5",
-		name: "Dinner",
-		start: "2023-03-27T04:15:00.000Z",
-		end: "2023-03-27T04:45:00.000Z",
-	},
-	{
-		id: "2bINDHaaEasIHabPvRGD",
-		name: "Shower",
-		start: "2023-03-27T04:45:00.000Z",
-		end: "2023-03-27T05:30:00.000Z",
-	},
-	{
-		id: "meFWA9WHpGQmDzpEMrPd",
-		name: "Setup",
-		start: "2023-03-27T05:30:00.000Z",
-		end: "2023-03-27T05:45:00.000Z",
-	},
-	{
-		id: "kwNlIX06aKXTHaJwJYqT",
-		name: "Brush teeth",
-		start: "2023-03-27T05:45:00.000Z",
-		end: "2023-03-27T06:00:00.000Z",
-	},
-	{
-		id: "lFQP57uWODloYH4yBpvg",
-		name: "Sleep",
-		start: "2023-03-27T07:00:00.000Z",
+		start: "2023-03-27T14:45:00.000Z",
 		end: "2023-03-27T15:00:00.000Z",
+	},
+	{
+		id: "OKTYMzQgjFGJr8KLFq1a",
+		name: "Work",
+		start: "2023-03-27T15:00:00.000Z",
+		end: "2023-03-27T19:00:00.000Z",
+	},
+	{
+		id: "tER3FlFUZXSTqcQV4yqB",
+		name: "Lunch",
+		start: "2023-03-27T19:00:00.000Z",
+		end: "2023-03-27T19:15:00.000Z",
+	},
+	{
+		id: "MTUr97ZZxjbQkeIadxEG",
+		name: "Work",
+		start: "2023-03-27T19:15:00.000Z",
+		end: "2023-03-27T21:15:00.000Z",
+	},
+	{
+		id: "pICyxG4n6T8LszWfHdw7",
+		name: "Check email",
+		start: "2023-03-27T21:15:00.000Z",
+		end: "2023-03-27T21:30:00.000Z",
+	},
+	{
+		id: "xmMFZ0jfnfWyEes9XF0I",
+		name: "Water district report",
+		start: "2023-03-27T21:45:00.000Z",
+		end: "2023-03-27T22:15:00.000Z",
+	},
+	{
+		id: "hSnFKcymtZUA05nks0VT",
+		name: "Errands",
+		start: "2023-03-27T22:15:00.000Z",
+		end: "2023-03-28T00:15:00.000Z",
+	},
+	{
+		id: "EKtR8BYKECjgZMsIvcIg",
+		name: "Fix router",
+		start: "2023-03-28T00:30:00.000Z",
+		end: "2023-03-28T01:30:00.000Z",
+	},
+	{
+		id: "vGDhiSdUQs8VJOuL1uD1",
+		name: "Clean office",
+		start: "2023-03-28T01:30:00.000Z",
+		end: "2023-03-28T02:00:00.000Z",
+	},
+	{
+		id: "WMIEjbXpq6cXjD5AqWha",
+		name: "NT Discussion",
+		start: "2023-03-28T02:00:00.000Z",
+		end: "2023-03-28T03:00:00.000Z",
+	},
+	{
+		id: "u3ZIWy6o1kijRcezAFAp",
+		name: "DD Discussion",
+		start: "2023-03-28T03:15:00.000Z",
+		end: "2023-03-28T04:15:00.000Z",
+	},
+	{
+		id: "MOcSBuh6mlQyWGX1n2M5",
+		name: "Shower",
+		start: "2023-03-28T04:15:00.000Z",
+		end: "2023-03-28T05:00:00.000Z",
+	},
+	{
+		id: "A2XtrUAuCErukpZ7pLcc",
+		name: "Dinner",
+		start: "2023-03-28T05:00:00.000Z",
+		end: "2023-03-28T05:30:00.000Z",
+	},
+	{
+		id: "9RuYlLNi4dvMCVYem9aM",
+		name: "Setup",
+		start: "2023-03-28T05:30:00.000Z",
+		end: "2023-03-28T05:45:00.000Z",
+	},
+	{
+		id: "7nOn0R6Dh0lCGFf1Y7TG",
+		name: "Brush teeth",
+		start: "2023-03-28T05:45:00.000Z",
+		end: "2023-03-28T06:00:00.000Z",
+	},
+	{
+		id: "Z3Ij8yx4r8Rv6GkTk5yU",
+		name: "Sleep",
+		start: "2023-03-28T06:00:00.000Z",
+		end: "2023-03-28T14:00:00.000Z",
 	},
 ];
 
 export default MOCK_SCHEDULE.map(
-  (task) =>
-    ({ ...task, start: new Date(task.start), end: new Date(task.end) } as ITask)
+	(task) =>
+		({ ...task, start: new Date(task.start), end: new Date(task.end) } as ITask)
 );
