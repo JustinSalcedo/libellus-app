@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { ViewContext } from "../contexts"
 import MyText from "../fonts/MyText"
+import SettingsTray from "./SettingsTray"
 import TaskHistory from "./TaskHistory"
 
 interface IComponent {
@@ -21,10 +22,10 @@ const COMPONENTS: { [key: string]: IComponent } = {
     // "schedule-created": {
     //     heading: "Schedule created!"
     // },
-    // "settings": {
-    //     node: <SettingsTray />,
-    //     heading: "Settings"
-    // }
+    "settings": {
+        node: <SettingsTray />,
+        heading: "Settings"
+    }
 }
 
 export default function Modal({ onOverlayPress, heading, nodeKey, children }: {

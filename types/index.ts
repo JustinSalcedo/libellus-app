@@ -7,8 +7,11 @@ export interface ITask {
 
 export type ModalName = "" | "task-history" | "schedule-editor" | "schedule-created" | "settings"
 
-export interface ScheduleRangeSettings { dateRange: 'today' | 'custom', startDate: Date, endDate: Date }
+export type DateRangeMode = 'today' | 'custom'
 
 export type Theme = 'light' | 'dark' | 'system'
 
-export interface Settings { schedule: ScheduleRangeSettings, theme: Theme, editor: 'form' | 'prompt' }
+export type EditorMode = 'form' | 'prompt'
+
+// sR = schedule range
+export interface ISettings { sRDateRange: DateRangeMode, sRStart: Date, sREnd: Date, theme: Theme, editor: EditorMode }

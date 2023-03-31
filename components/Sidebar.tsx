@@ -23,9 +23,9 @@ export default function Sidebar() {
         <View style={styles.tray}>
             {sidebarOn ? <>
                 <View style={styles.buttons}>
-                    <FloatingButton symbol="+" />
+                    <FloatingButton symbol="+" onPress={() => false} />
                     {/* <FloatingButton symbol="⟳" /> */}
-                    <FloatingButton symbol="⚙" higherTop={true} />
+                    <FloatingButton symbol="⚙" higherTop={true} onPress={handleClickOnGear} />
                 </View>
                 <View style={styles.hider}>
                     <Pressable  onPress={() => setSidebarOn(false)} style={styles.collapse}>

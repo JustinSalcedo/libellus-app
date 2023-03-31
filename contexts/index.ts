@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ITask, ModalName, ScheduleRangeSettings, Settings, Theme } from "../types";
+import { ITask, ModalName, Theme, DateRangeMode } from "../types";
 
 export const ViewContext = createContext({
     isModalOn: false,
@@ -9,13 +9,17 @@ export const ViewContext = createContext({
 })
 
 export const SettingsContext = createContext({
-    scheduleRange: null as unknown as ScheduleRangeSettings,
-    setSettings: (settings: Partial<Settings>) => {},
+    sRDateRange: 'today' as DateRangeMode,
+    sRStart: new Date(),
+    sREnd: new Date(),
+    setSRRangeMode: (rangeMode: DateRangeMode) => {},
+    setSRRangeDates: (dates: { sRStart: Date, sREnd: Date }) => {},
     theme: 'system' as Theme,
     getTheme: () => 'system' as Theme,
     setTheme: (theme: Theme) => {},
     editor: 'form' as 'form' | 'prompt',
-    setEditor: (editor: 'form' | 'prompt') => {}
+    setEditor: (editor: 'form' | 'prompt') => {},
+    saveSettings: async () => {} 
 })
 
 export const ScheduleContext = createContext({

@@ -7,7 +7,6 @@ import { ModalName } from "../types";
 
 export default function Minimal({ children }: { children: ReactNode }) {
     const [modalOn, setModalOn] = useState(false)
-    // const [modalOn, setModalOn] = useState(true)
     const [activeModal, setActiveModal] = useState('' as ModalName)
 
     function handleOnClick() {

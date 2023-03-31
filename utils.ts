@@ -1,5 +1,6 @@
+import { Platform } from "react-native"
 import { MAX_TASK_NAME } from "./constants"
-import { ITask } from "./types"
+import { ISettings, ITask } from "./types"
 
 const DEF_GAP = { name: "Chill" }
 
@@ -188,8 +189,18 @@ export function timelineIncludesToday(timeline: ITask[]) {
 }
 
 export function getTodayRange() {
-    const today = new Date().toLocaleDateString()
-    const startsAt = new Date(today)
+    let startsAt: Date = new Date()
+
+    if (Platform.OS !== "web") {
+        const dayInMs = 24 * 60 * 60 * 1000
+        const now = new Date()
+        const hoursDiff = now.getHours() - now.getUTCHours()
+        startsAt = new Date(Math.floor(now.getTime() / dayInMs) * dayInMs + hoursDiff * 3600 * 1000)
+    } else {
+        const today = new Date().toLocaleDateString()
+        startsAt = new Date(`${today}`)
+    }
+
     const endsAt = new Date(startsAt.getTime() + 24 * 60 * 60 * 1000)
     return { startsAt, endsAt }
 }
@@ -215,6 +226,18 @@ export function countRows(sortedSchedule: ITask[], showHistory: boolean) {
 
     rowsCount += parsedSchedule.length
     return rowsCount
+}
+
+export function getDefaultSettings(): ISettings {
+    const { startsAt, endsAt } = getTodayRange()
+
+    return {
+        sRDateRange: 'today',
+        sRStart: startsAt,
+        sREnd: endsAt,
+        theme: 'system',
+        editor: 'prompt'
+    }
 }
 
 // Misc

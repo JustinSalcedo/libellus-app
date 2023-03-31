@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import MyText from "../fonts/MyText";
 
-export default function FloatingButton({ symbol, higherTop }: { symbol: string, higherTop?: boolean }) {
+export default function FloatingButton({ symbol, higherTop, onPress }: {
+    symbol: string, onPress: () => void, higherTop?: boolean
+}) {
     return (
-        <View style={higherTop ? [styles.circle, styles.higherBotton] : styles.circle}>
+        <Pressable onPress={onPress}
+            style={higherTop ? [styles.circle, styles.higherBotton] : styles.circle}>
             <MyText><Text style={styles.symbol}>{symbol}</Text></MyText>
-        </View>
+        </Pressable>
     )
 }
 
