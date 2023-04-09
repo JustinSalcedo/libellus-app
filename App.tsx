@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import MOCK_SCHEDULE from './MOCK_SCHEDULE'
 import MainScreen from './pages/MainScreen'
 import { ScheduleContext, SettingsContext } from './contexts'
 import { DateRangeMode, EditorMode, ISettings, ITask, Theme } from './types'
@@ -24,9 +23,6 @@ export default function App() {
     const [hasLoadedSettings, setHasLoadedSettings] = useState(false)
 
     useEffect(() => {
-		if (!schedule.length) AsyncStorage.setItem('schedule', JSON.stringify(MOCK_SCHEDULE))
-			.then(() => setHasLoaded(false))
-
 		if (!hasLoadedSettings) recoverSettings()
 			.then(recoveredSettings => {
 				const { sRDateRange, sRStart, sREnd, theme, editor } = recoveredSettings

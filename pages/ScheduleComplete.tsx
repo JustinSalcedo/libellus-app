@@ -1,12 +1,11 @@
+import { useContext } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import MyButton from "../components/MyButton";
+import { ViewContext } from "../contexts";
 import MyText from "../fonts/MyText";
 import Minimal from "../layouts/Minimal";
 
 export default function ScheduleComplete() {
-    function onAddNewTasks() {
-        return
-    }
 
     return (
         <Minimal>
@@ -22,7 +21,7 @@ export default function ScheduleComplete() {
                     </View>
                 </View>
                 <View style={styles.action}>
-                    <MyButton onPress={onAddNewTasks} title={'Add new tasks'} />
+                    <AddNewTasksButton />
                 </View>
                 <View style={styles.note}>
                     <MyText>
@@ -36,6 +35,18 @@ export default function ScheduleComplete() {
                 </View>
             </View>
         </Minimal>
+    )
+}
+
+function AddNewTasksButton() {
+    const { setActiveModal, launchModal, activeModal } = useContext(ViewContext)
+    
+    function onAddNewTasks() {
+        setActiveModal('schedule-editor')
+        launchModal(true)
+    }
+    return (
+        <MyButton onPress={onAddNewTasks} title='Add new tasks' />
     )
 }
 

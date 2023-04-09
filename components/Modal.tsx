@@ -1,7 +1,8 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { ViewContext } from "../contexts"
 import MyText from "../fonts/MyText"
+import ScheduleEditor from "./ScheduleEditor"
 import SettingsTray from "./SettingsTray"
 import TaskHistory from "./TaskHistory"
 
@@ -15,13 +16,13 @@ const COMPONENTS: { [key: string]: IComponent } = {
         node: <TaskHistory />,
         heading: "Task history"
     },
-    // "schedule-editor": {
-    //     node: <ScheduleEditor />,
-    //     heading: "Add new schedule"
-    // },
-    // "schedule-created": {
-    //     heading: "Schedule created!"
-    // },
+    "schedule-editor": {
+        node: <ScheduleEditor />,
+        heading: "Add new schedule"
+    },
+    "schedule-created": {
+        heading: "Schedule created!"
+    },
     "settings": {
         node: <SettingsTray />,
         heading: "Settings"

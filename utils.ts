@@ -189,18 +189,9 @@ export function timelineIncludesToday(timeline: ITask[]) {
 }
 
 export function getTodayRange() {
-    let startsAt: Date = new Date()
-
-    if (Platform.OS !== "web") {
-        const dayInMs = 24 * 60 * 60 * 1000
-        const now = new Date()
-        const hoursDiff = now.getHours() - now.getUTCHours()
-        startsAt = new Date(Math.floor(now.getTime() / dayInMs) * dayInMs + hoursDiff * 3600 * 1000)
-    } else {
-        const today = new Date().toLocaleDateString()
-        startsAt = new Date(`${today}`)
-    }
-
+    const now = new Date()
+    const today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} 0:00`
+    const startsAt = new Date(today)
     const endsAt = new Date(startsAt.getTime() + 24 * 60 * 60 * 1000)
     return { startsAt, endsAt }
 }
@@ -236,7 +227,7 @@ export function getDefaultSettings(): ISettings {
         sRStart: startsAt,
         sREnd: endsAt,
         theme: 'system',
-        editor: 'prompt'
+        editor: 'form'
     }
 }
 

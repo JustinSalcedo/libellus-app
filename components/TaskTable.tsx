@@ -126,14 +126,14 @@ const trimName = (str: string) => str.length > MAX_TASK_NAME / 2 ? `${str.substr
 
 const styles = StyleSheet.create({
     table: {
-        width: 280,
-        marginTop: .4 * 16
+        width: 280
     },
     row: {
         flex: 1,
         flexDirection: "row",
         paddingVertical: .5 * 16 - 2,
-        alignItems: "center"
+        alignItems: "center",
+        height: 35
     },
     cell: {
         flex: 1,

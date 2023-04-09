@@ -23,17 +23,17 @@ export default function Sidebar() {
         <View style={styles.tray}>
             {sidebarOn ? <>
                 <View style={styles.buttons}>
-                    <FloatingButton symbol="+" onPress={() => false} />
+                    <FloatingButton symbol="+" onPress={handleClickOnPlus} />
                     {/* <FloatingButton symbol="⟳" /> */}
                     <FloatingButton symbol="⚙" higherTop={true} onPress={handleClickOnGear} />
                 </View>
                 <View style={styles.hider}>
-                    <Pressable  onPress={() => setSidebarOn(false)} style={styles.collapse}>
+                    <Pressable onPress={() => setSidebarOn(false)} style={styles.collapse}>
                         <MyText><Text style={styles.collapseSymbol}>^</Text></MyText>
                     </Pressable>
                 </View>
             </> : <View style={styles.trigger}>
-                <Burger onPress={() => setSidebarOn(true)}/>
+                <Burger onPress={() => setSidebarOn(true)} />
             </View>}
         </View>
     )
