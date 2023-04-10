@@ -4,6 +4,7 @@ import { RadioButtonProps, RadioGroup } from "react-native-radio-buttons-group"
 import { SettingsContext } from "../contexts"
 import { EditorMode } from "../types"
 import ScheduleForm from "./ScheduleForm"
+import TaskListPrompt from "./TaskListPrompt"
 
 export default function ScheduleEditor() {
     const { editor, setEditor, saveSettings } = useContext(SettingsContext)
@@ -29,7 +30,7 @@ export default function ScheduleEditor() {
             <View style={styles.spacer}>
                 <RadioGroup layout="row" radioButtons={[formRadioButton(), promptRadioButton()]} onPress={onEditorRadioChange} />
             </View>
-            {editor === 'form' ? <ScheduleForm /> : <></> }
+            {editor === 'form' ? <ScheduleForm /> : <TaskListPrompt /> }
         </>
     )
 }

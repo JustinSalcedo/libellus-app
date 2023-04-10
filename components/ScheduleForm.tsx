@@ -56,7 +56,6 @@ export default function ScheduleForm() {
     }, [isEdit])
 
     function shouldScroll() {
-        // const scheduleLength = Object.values(scheduleGroup).flatMap(task => task).length
         let taskInputs = 0; let taskTableRows = 0
         Object.entries(scheduleGroup).forEach(([localDate, taskList]) => {
             if (previewList.some(previewDate => previewDate === localDate)) taskTableRows += taskList.length
