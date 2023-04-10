@@ -37,36 +37,10 @@ export default function App() {
 				if (localSchedule) {
                     setSchedule(validateSchedule(formatSchedule(JSON.parse(localSchedule))))
                     setHasLoaded(true)
-				}
+				} else setHasLoaded(true)
 			})
 			.catch(e => e)
 	}, [hasLoaded])
-
-    // async function storeSettings({ sRDateRange, sRStart, sREnd, theme, editor }: Partial<ISettings>) {
-    //     const rawSettings = await AsyncStorage.getItem('settings')
-    //     const settings: Partial<ISettings> = rawSettings ? { ...JSON.parse(rawSettings) } : {}
-    //     if (sRDateRange) {
-    //         settings.sRDateRange = sRDateRange
-    //         setDateRange(sRDateRange)
-    //     }
-    //     if (sRStart) {
-    //         settings.sRStart = sRStart
-    //         setStartDate(sRStart)
-    //     }
-    //     if (sREnd) {
-    //         settings.sREnd = sREnd
-    //         setEndDate(sREnd)
-    //     }
-    //     if (theme) {
-    //         settings.theme = theme
-    //         setTheme(theme)
-    //     }
-    //     if (editor) {
-    //         settings.editor = editor
-    //         setEditor(editor)
-    //     }
-    //     await AsyncStorage.setItem('settings', JSON.stringify(settings))
-    // }
 
     async function storeSettings() {
         const settings: ISettings = { sRDateRange: dateRange, sRStart: startDate, sREnd: endDate, theme, editor }
@@ -154,7 +128,7 @@ export default function App() {
         <SettingsContext.Provider value={{ sRDateRange: dateRange, sRStart: startDate, sREnd: endDate, setSRRangeMode: setDateRange,
             setSRRangeDates, theme, getTheme, setTheme, editor, setEditor, saveSettings: storeSettings }}>
             <ScheduleContext.Provider value={{ schedule, setSchedule }}>
-                {!hasLoaded ? <LoadScreen/> : (isActiveSchedule() ? <MainScreen/> : <ScheduleComplete/>)} 
+                {!hasLoaded ? <LoadScreen/> : (schedule.length && isActiveSchedule() ? <MainScreen/> : <ScheduleComplete/>)} 
             </ScheduleContext.Provider>
         </SettingsContext.Provider>
 	)

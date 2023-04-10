@@ -10,7 +10,7 @@ import { getTaskQueue } from "../utils";
 import LoadScreen from "./LoadScreen";
 
 export default function MainScreen() {
-    const { schedule } = useContext(ScheduleContext)
+    const { schedule, setSchedule } = useContext(ScheduleContext)
 
     const [timer, setTimer] = useState(null as unknown as number)
     const [prevTask, setPrevTask] = useState(null as unknown as ITask)
@@ -26,6 +26,8 @@ export default function MainScreen() {
 
     useEffect(() => {
         setTimer(setInterval(tick, 1000))
+
+        if (!currentTask) setSchedule([])
 
         // TODO: Notifications
         // if (!wasNotified && currentTask) {
