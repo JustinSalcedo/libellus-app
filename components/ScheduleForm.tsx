@@ -40,9 +40,15 @@ export default function ScheduleForm() {
 
     useEffect(() => {
         if (isEdit) {
-            const generatedGroup = scheduleToGroup(currSchedule)
-            setScheduleGroup(generatedGroup)
-            setDateList(Object.keys(generatedGroup))
+            if (!currSchedule.length) {
+                setNote('No schedule set')
+                setIsEdit(false)
+            } else {
+                const generatedGroup = scheduleToGroup(currSchedule)
+                setScheduleGroup(generatedGroup)
+                setDateList(Object.keys(generatedGroup))
+                setNote('')
+            }
         } else {
             AsyncStorage.getItem('scheduleGroup')
                 .then(rawScheduleGroup => {

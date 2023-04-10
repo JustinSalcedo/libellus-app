@@ -22,8 +22,14 @@ export default function TaskListPrompt() {
 
     useEffect(() => {
         if (isEdit) {
-            const generatedPrompt = scheduleToPrompt(currSchedule)
-            setPrompt(generatedPrompt)
+            if (!currSchedule.length) {
+                setNote('No schedule set')
+                setIsEdit(false)
+            } else {
+                const generatedPrompt = scheduleToPrompt(currSchedule)
+                setPrompt(generatedPrompt)
+                setNote('')
+            }
         } else {
             AsyncStorage.getItem('prompt')
                 .then(savedPrompt => {

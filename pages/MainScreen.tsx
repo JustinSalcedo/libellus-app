@@ -27,7 +27,7 @@ export default function MainScreen() {
     useEffect(() => {
         setTimer(setInterval(tick, 1000))
 
-        if (!currentTask) setSchedule([])
+        // if (!currentTask) setSchedule([])
 
         // TODO: Notifications
         // if (!wasNotified && currentTask) {
