@@ -10,7 +10,7 @@ import { getTaskQueue } from "../utils";
 import LoadScreen from "./LoadScreen";
 
 export default function MainScreen() {
-    const { schedule, setSchedule } = useContext(ScheduleContext)
+    const { schedule, refreshSchedule } = useContext(ScheduleContext)
 
     const [timer, setTimer] = useState(null as unknown as number)
     const [prevTask, setPrevTask] = useState(null as unknown as ITask)
@@ -18,16 +18,17 @@ export default function MainScreen() {
     const [nextTask, setNextTask] = useState(null as unknown as ITask)
     // const [wasNotified, setWasNotified] = useState(false)
 
+    const [isActive, setIsActive] = useState(true)
+
     const tick = () => {
         const { prevTask: prev, currentTask: curr, nextTask: next } = getTaskQueue(schedule)
-        if (currentTask && ((!currentTask.id && !curr.id) || (currentTask.id && curr.id && currentTask.id === curr.id))) return
+        if (!curr) setIsActive(false)
+        if (currentTask && curr && ((!currentTask.id && !curr.id) || (currentTask.id && curr.id && currentTask.id === curr.id))) return
         setPrevTask(prev); setCurrentTask(curr); setNextTask(next)
     }
 
     useEffect(() => {
         setTimer(setInterval(tick, 1000))
-
-        // if (!currentTask) setSchedule([])
 
         // TODO: Notifications
         // if (!wasNotified && currentTask) {
@@ -37,6 +38,10 @@ export default function MainScreen() {
 
         return clearInterval(timer)
     }, [currentTask])
+
+    useEffect(() => {
+        if (!isActive) return refreshSchedule()
+    }, [isActive])
 
     function nullifyGaps(task: ITask) {
         if (!task || task.name === "Chill") return null as unknown as ITask

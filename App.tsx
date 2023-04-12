@@ -121,13 +121,13 @@ export default function App() {
 
     const isActiveSchedule = () => {
         const { currentTask, nextTask } = getTaskQueue(validateSchedule(schedule), true)
-        return schedule.length && (currentTask || nextTask)
+        return !!schedule.length && !!(currentTask || nextTask)
     }
 
 	return (
         <SettingsContext.Provider value={{ sRDateRange: dateRange, sRStart: startDate, sREnd: endDate, setSRRangeMode: setDateRange,
             setSRRangeDates, theme, getTheme, setTheme, editor, setEditor, saveSettings: storeSettings }}>
-            <ScheduleContext.Provider value={{ schedule, setSchedule }}>
+            <ScheduleContext.Provider value={{ schedule, setSchedule, refreshSchedule: () => setHasLoaded(false) }}>
                 {!hasLoaded ? <LoadScreen/> : (schedule.length && isActiveSchedule() ? <MainScreen/> : <ScheduleComplete/>)} 
             </ScheduleContext.Provider>
         </SettingsContext.Provider>

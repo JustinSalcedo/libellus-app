@@ -60,12 +60,12 @@ const styles = StyleSheet.create({
     }
 })
 
-function getLocalTime(date: Date) {
+export function getLocalTime(date: Date) {
 	const hour = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`
 	const minute = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`
 	return `${hour}:${minute}`
 }
 
-function setLocalDateTime(date: Date, time: string) {
+export function setLocalDateTime(date: Date, time: string) {
     return new Date(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${time}`)
 }

@@ -11,7 +11,7 @@ import TaskTable from "./TaskTable";
 
 export default function TaskListPrompt() {
     const { sRDateRange, sRStart, sREnd, getTheme } = useContext(SettingsContext)
-    const { setSchedule: setGlobalSchedule, schedule: currSchedule } = useContext(ScheduleContext)
+    const { setSchedule: setGlobalSchedule, schedule: currSchedule, refreshSchedule } = useContext(ScheduleContext)
     const { setActiveModal, launchModal } = useContext(ViewContext)
 
     const [schedule, setSchedule] = useState(null as unknown as ITask[])
@@ -65,10 +65,12 @@ export default function TaskListPrompt() {
         if (!schedule || !schedule.length) return
 
         try {
-            await AsyncStorage.setItem('schedule', JSON.stringify(schedule))
+            const scheduleWithIds = schedule.map(task => ({ ...task, id: `${task.start.getTime()}-${task.end.getTime()}` }))
+            await AsyncStorage.setItem('schedule', JSON.stringify(scheduleWithIds))
             setTimeout(() => {
-                setGlobalSchedule(schedule)
+                setGlobalSchedule(scheduleWithIds)
                 launchModal(false)
+                refreshSchedule()
             }, 1000)
             setActiveModal('schedule-created')
             if (!isEdit) AsyncStorage.removeItem('prompt')

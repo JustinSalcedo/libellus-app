@@ -26,4 +26,5 @@ export const ScheduleContext = createContext({
     schedule: [] as ITask[],
     setSchedule: (schedule: ITask[]) => {},
     // refreshSchedule: (loadOnly?: boolean) => {}
+    refreshSchedule: () => {}
 })

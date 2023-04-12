@@ -10,12 +10,12 @@ import MyCheckBox from "./MyCheckBox"
 import MyDateInput from "./MyDateInput"
 import MyMiniButton from "./MyMiniButton"
 import MySuperButton from "./MySuperButton"
-import MyTimeInput from "./MyTimeInput"
+import MyTimeInput, { getLocalTime, setLocalDateTime } from "./MyTimeInput"
 import TaskTable from "./TaskTable"
 
 export default function ScheduleForm() {
     const { getTheme, sRStart, sRDateRange } = useContext(SettingsContext)
-    const { setSchedule: setGlobalSchedule, schedule: currSchedule } = useContext(ScheduleContext)
+    const { setSchedule: setGlobalSchedule, schedule: currSchedule, refreshSchedule } = useContext(ScheduleContext)
     const { setActiveModal, launchModal } = useContext(ViewContext)
 
     const startDate = sRDateRange === "custom" ? sRStart : getTodayRange().startsAt
@@ -98,7 +98,11 @@ export default function ScheduleForm() {
             setScheduleGroup(scheduleGroup => {
                 const taskList = scheduleGroup[dateList[index]]
                 delete scheduleGroup[dateList[index]]
-                return { ...scheduleGroup, [localDate]: taskList }
+                return { ...scheduleGroup, [localDate]: taskList.map(task => ({
+                    ...task,
+                    start: setLocalDateTime(date, getLocalTime(task.start)),
+                    end: setLocalDateTime(date, getLocalTime(task.end))
+                })) }
             })
             setNote('')
             const updatedDates = [...dateList.slice(0, index), localDate, ...dateList.slice(index + 1)]
@@ -159,11 +163,12 @@ export default function ScheduleForm() {
 
     async function createSchedule() {
         try {
-            const schedule = Object.values(scheduleGroup).flatMap(taskList => taskList)
+            const schedule = Object.values(scheduleGroup).flatMap(taskList => taskList.map(task => ({ ...task, id: `${task.start.getTime()}-${task.end.getTime()}` })))
             await AsyncStorage.setItem('schedule', JSON.stringify(schedule))
             setTimeout(() => {
                 setGlobalSchedule(schedule)
                 launchModal(false)
+                refreshSchedule()
             }, 1000)
             setActiveModal('schedule-created')
             if (!isEdit) AsyncStorage.removeItem('scheduleGroup')
