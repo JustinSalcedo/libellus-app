@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import TaskQueue from "../components/TaskQueue";
 import Timer from "../components/Timer";
 import { ScheduleContext } from "../contexts";
@@ -8,6 +8,8 @@ import Minimal from "../layouts/Minimal";
 import { ITask } from "../types";
 import { getTaskQueue } from "../utils";
 import LoadScreen from "./LoadScreen";
+import Notifier from "../components/Notifier";
+import ScheduleNotifier from "../components/ScheduleNotifier";
 
 export default function MainScreen() {
     const { schedule, refreshSchedule } = useContext(ScheduleContext)
@@ -16,7 +18,6 @@ export default function MainScreen() {
     const [prevTask, setPrevTask] = useState(null as unknown as ITask)
     const [currentTask, setCurrentTask] = useState(null as unknown as ITask)
     const [nextTask, setNextTask] = useState(null as unknown as ITask)
-    // const [wasNotified, setWasNotified] = useState(false)
 
     const [isActive, setIsActive] = useState(true)
 
@@ -24,10 +25,11 @@ export default function MainScreen() {
         const { prevTask: prev, currentTask: curr, nextTask: next } = getTaskQueue(schedule)
         if (!curr) setIsActive(false)
         if (currentTask && curr && ((!currentTask.id && !curr.id) || (currentTask.id && curr.id && currentTask.id === curr.id))) return
-        setPrevTask(prev); setCurrentTask(curr); setNextTask(next)
+        setPrevTask(prev); setCurrentTask(curr); setNextTask(next);
     }
 
     useEffect(() => {
+        // TODO: Clear interval before new task
         setTimer(setInterval(tick, 1000))
 
         // TODO: Notifications
@@ -51,6 +53,8 @@ export default function MainScreen() {
 
     return currentTask ? (
         <Minimal>
+            <ScheduleNotifier />
+            {/* {currentTask.id ? <Notifier task={currentTask}/> : <></> } */}
             <View style={styles.container}>
                 <View style={styles.top}>
                     {currentTask ? (

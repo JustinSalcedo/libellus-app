@@ -7,7 +7,15 @@ import { getDefaultSettings, getTaskQueue, getTodayRange, validateSchedule } fro
 import ScheduleComplete from './pages/ScheduleComplete'
 import LoadScreen from './pages/LoadScreen'
 import { Appearance } from 'react-native'
+import * as TaskManager from 'expo-task-manager'
+import * as Notifications from 'expo-notifications'
 const { startsAt, endsAt } = getTodayRange()
+
+const BACKGROUND_NOTIFICATION_TASK = 'BACKGROUND-NOTIFICATION-TASK'
+
+TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, (({ data, error, executionInfo }) => {
+    setTimeout(Notifications.dismissAllNotificationsAsync, 3 * 1000)
+}))
 
 export default function App() {
     const [schedule, setSchedule] = useState([] as ITask[])
